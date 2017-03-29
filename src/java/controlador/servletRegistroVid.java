@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import modelo.Video;
 
 /**
@@ -22,14 +23,16 @@ import modelo.Video;
 public class servletRegistroVid extends HttpServlet {
 
     private int registred;
-    
+
     private void createVideo(String title, String author, String date,
-            String duration, String description, String format, String path) {
+            String duration, String description, String format, String path,
+            String username) {
         Video v = new Video(title, author, date, duration, description,
-                format, path);
-        
+                format, path, username);
+
         this.registred = v.createDBVideo();
     }
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -39,22 +42,29 @@ public class servletRegistroVid extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, 
+    protected void processRequest(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
-        String title = request.getParameter("title");
-        String author = request.getParameter("author");
-        String date = request.getParameter("date");
-        String duration = request.getParameter("duration");
-        String description = request.getParameter("description");
-        String format = request.getParameter("format");
-        String path = request.getParameter("path");
-        
-        this.createVideo(title, author, date, duration, description, format, 
-                path);
-        
-        response.sendRedirect("videoRes.jsp?registration="
-                + URLEncoder.encode(String.valueOf(this.registred), "UTF-8"));
+        HttpSession sess = request.getSession(true);
+        if (sess.getAttribute("username") == null) {
+            response.sendRedirect("index.jsp");
+        } else {
+            String username = (String) sess.getAttribute("username");
+            String title = request.getParameter("title");
+            String author = request.getParameter("author");
+            String date = request.getParameter("date");
+            String duration = request.getParameter("duration");
+            String description = request.getParameter("description");
+            String format = request.getParameter("format");
+            String path = request.getParameter("path");
+
+            this.createVideo(title, author, date, duration, description, format,
+                    path, username);
+
+            response.sendRedirect("videoRes.jsp?registration="
+                    + URLEncoder.encode(String.valueOf(this.registred), "UTF-8"));
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -35,11 +35,10 @@ public class DB {
     }
 
     public void createDBVideo(String title, String author, String date, String duration,
-            String description, String format, String path) {
+            String description, String format, String path, String username) {
 
-        String query = "INSERT INTO VIDEOS(title, author, date, duration, views, description, format, path)"
-                + "VALUES(\'" + title + "\',\'" + author + "\',\'" + date + "\',\'" + duration + "\'," + 0 + ",\'" + description + "\',\'" + format + "\',\'" + path + "\')";
-
+        String query = "INSERT INTO VIDEOS(title, author, date, duration, views, description, format, path, user_id)"
+                + " VALUES (\'" + title + "\',\'" + author + "\',\'" + date + "\',\'" + duration + "\'," + 0 + ",\'" + description + "\',\'" + format + "\',\'" + path + "\',\'" + username + "\')";
         try {
             sentencia = this.conexion.createStatement();
             sentencia.executeUpdate(query);
@@ -50,7 +49,7 @@ public class DB {
 
     public void createDBUser(String name, String surname, String email, String username, String password) {
         String query = "INSERT INTO USERS(name, surname, email, username, password)"
-                + "VALUES(\'" + name + "\',\'" + surname + "\',\'" + email + "\',\'" + username + "\',\'" + password + "\')";
+                + " VALUES (\'" + name + "\',\'" + surname + "\',\'" + email + "\',\'" + username + "\',\'" + password + "\')";
         
         try {
             sentencia = this.conexion.createStatement();

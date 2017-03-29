@@ -18,10 +18,11 @@ public class Video {
     private final String description;
     private final String format;
     private final String path;
+    private final String username;
     private final DB db;
     
     public Video(String title, String author, String date, String duration,
-            String description, String format, String path) {
+            String description, String format, String path, String username) {
         this.title = title;
         this.author = author;
         this.date = date;
@@ -29,6 +30,7 @@ public class Video {
         this.description = description;
         this.format = format;
         this.path = path;
+        this.username = username;
         this.db = new DB();
     }
     
@@ -53,7 +55,7 @@ public class Video {
         
         if(this.validateVideo()) {
             db.createDBVideo(this.title, this.author, this.date, this.duration, 
-                    this.description, this.format, this.path);
+                    this.description, this.format, this.path, this.username);
         }
         else {
             errCode = 1;
