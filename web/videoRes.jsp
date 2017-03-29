@@ -15,7 +15,7 @@
     <body>
         <div class="box">
             <% if (request.getParameter("registration").equals("0")) {
-                    out.println("<h1>Usuari creat!</h1>");
+                    out.println("<h1>Vídeo creat!</h1>");
                 } else {
                         out.println("<h1>Error: no es compleixen requisits de camps</h1>");
                 }

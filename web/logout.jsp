@@ -11,9 +11,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
-        <h1>Log out realitzat!</h1>
+        <div class="box">
+            <h1>Log out realitzat!</h1>
+        </div>
         <meta http-equiv="refresh" content="2;url=index.jsp" />
     </body>
 </html>
