@@ -4,6 +4,8 @@
     Author     : Pau
 --%>
 
+<%@page import="java.sql.ResultSet"%>
+<%@page import="modelo.DB"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,6 +14,23 @@
         <title>JSP Page</title>
         <link rel="stylesheet" type="text/css" href="style.css">
 
+        <style>
+            table {
+                border-collapse: collapse;
+            }
+
+            th, td {
+                padding: 2px;
+            }
+
+            tr:nth-child(even){background-color: #f2f2f2}
+
+            th {
+                background-color: #4CAF50;
+                color: white;
+            }
+        </style>
+
         <script>
             function validateForm1() {
                 var name = document.forms["formulario1"]["name"].value;
@@ -19,7 +38,7 @@
                 if (name === "") { // comprovació de camps buits
                     alert("Error: s'han de completar els camps del formulari");
                 } else {
-                    if ((name.length < 3) || (name.length > 50)) { 
+                    if ((name.length < 3) || (name.length > 50)) {
                         // comprovació de longituds
                         alert("Error: no es compleixen longituds de camps");
                     } else {
@@ -48,7 +67,7 @@
                             (date.length !== 10) || (duration.length !== 5) ||
                             (description.length < 25 || description.length > 255) ||
                             (format.length < 2 || format.length > 5) ||
-                            (path.length < 5 || path.length > 300)) { 
+                            (path.length < 5 || path.length > 300)) {
                         alert("No se cumplen los requisitos de longitud de campos");
                     } else {
                         valid = true;
@@ -73,9 +92,35 @@
             <form name="formulario1" method="post" action="servletRegistroVid"
                   onsubmit="return validateForm1()">
                 Nom: <input type="text" name="name"><br>
-                <br>
                 <input type="submit" name="submit" value="Cercar">
             </form>
+
+            <h1>Últims vídeos</h1>
+            <table style="margin: 0 auto;">
+                <tr>
+                    <th>Títol</th>
+                    <th>Autor</th>
+                    <th>Duració</th>
+                    <th>Data</th>
+                    <th>Visualitzacions</th>
+                    <th>Format</th>
+                </tr>
+                <%
+                    DB db = new DB();
+                    ResultSet rs = db.getLastVideos(5);
+
+                    while (rs.next()) {
+                        out.println("<tr>");
+                        out.println("<td><a href=\"" + rs.getString("path") + "\">" + rs.getString("title") + "</a></td>");
+                        out.println("<td>" + rs.getString("author") + "</td>");
+                        out.println("<td>" + rs.getString("duration") + "</td>");
+                        out.println("<td>" + rs.getString("date") + "</td>");
+                        out.println("<td>" + rs.getString("views") + "</td>");
+                        out.println("<td>" + rs.getString("format") + "</td>");
+                        out.println("</tr>");
+                    }
+                %>
+            </table>
 
             <h1>Registrar vídeo</h1>
             <form name="formulario2" method="post" action="servletRegistroVid"

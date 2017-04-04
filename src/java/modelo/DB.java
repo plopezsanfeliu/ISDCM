@@ -34,11 +34,23 @@ public class DB {
         }
     }
 
+    /**
+     * Crea vídeo a DB amb els paràmetres passats.
+     * @param title
+     * @param author
+     * @param date
+     * @param duration
+     * @param description
+     * @param format
+     * @param path
+     * @param username 
+     */
     public void createDBVideo(String title, String author, String date, String duration,
             String description, String format, String path, String username) {
 
         String query = "INSERT INTO VIDEOS(title, author, date, duration, views, description, format, path, user_id)"
                 + " VALUES (\'" + title + "\',\'" + author + "\',\'" + date + "\',\'" + duration + "\'," + 0 + ",\'" + description + "\',\'" + format + "\',\'" + path + "\',\'" + username + "\')";
+        System.out.println(query);
         try {
             sentencia = this.conexion.createStatement();
             sentencia.executeUpdate(query);
@@ -47,6 +59,14 @@ public class DB {
         }
     }
 
+    /**
+     * Crea usuari a DB amb els paràmetres passats.
+     * @param name
+     * @param surname
+     * @param email
+     * @param username
+     * @param password 
+     */
     public void createDBUser(String name, String surname, String email, String username, String password) {
         String query = "INSERT INTO USERS(name, surname, email, username, password)"
                 + " VALUES (\'" + name + "\',\'" + surname + "\',\'" + email + "\',\'" + username + "\',\'" + password + "\')";
@@ -59,6 +79,13 @@ public class DB {
         }
     }
     
+    /**
+     * Mètode cridat al intentar login que retorna cert o fals si les
+     * credencials són correctes, mitjançant l'ús de consulta a BD.
+     * @param username
+     * @param password
+     * @return Booleà OK o KO.
+     */
     public boolean validateDBUser(String username, String password) {
         String count = "0";
         boolean valid = false;
@@ -85,6 +112,14 @@ public class DB {
         return valid;
     }
     
+    /**
+     * Comprova les dues condicions (clau primària i unique) de username i email
+     * consultant si existeix algún valor a la BD amb els paràmetres del
+     * formulari.
+     * @param username
+     * @param email
+     * @return Codi d'error (o èxit)
+     */
     public int securityCheck(String username, String email) {
         String count = "0";
         int errCode = 0;
@@ -126,5 +161,27 @@ public class DB {
         }
 
         return errCode;
+    }
+    
+    /**
+     * Retorna els number vídeos últims afegits a la BD. Mètode cridat per la
+     * view "videos.jsp".
+     * @param number
+     * @return ResultSet amb els number últims vídeos
+     */
+    public ResultSet getLastVideos(int number) {
+        ResultSet rs = null;
+        
+        try {
+            String query = "SELECT TITLE, AUTHOR, DATE, DURATION, VIEWS, FORMAT, PATH FROM ISDCM.VIDEOS FETCH FIRST " + number + " ROWS ONLY";
+            
+            sentencia = this.conexion.createStatement();
+            
+            rs = sentencia.executeQuery(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+
+        return rs;
     }
 }
