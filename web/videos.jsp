@@ -64,7 +64,7 @@
                 } else {
                     if ((title.length < 3 || title.length > 100) ||
                             (author.length < 2 || author.length > 100) ||
-                            (date.length !== 10) || (duration.length !== 5) ||
+                            (date.length !== 10) || (duration.length !== 8) ||
                             (description.length < 25 || description.length > 255) ||
                             (format.length < 2 || format.length > 5) ||
                             (path.length < 5 || path.length > 300)) {
@@ -127,8 +127,8 @@
                   onsubmit="return validateForm2()">
                 Títol: <input type="text" name="title"><br>
                 Autor: <input type="text" name="author"><br>
-                Data de llançament: <input type="date" name="date"><br>
-                Duració: <input type="time" name="duration"><br>
+                Data de llançament(dd/mm/aaaa): <input type="date" name="date"><br>
+                Duració (hh:mm:ss): <input type="time" name="duration"><br>
                 Descripció: <input type="text" name="description">
                 Format: <input type="text" name="format">
                 Ruta: <input type="text" name="path">

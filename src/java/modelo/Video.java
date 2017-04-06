@@ -40,7 +40,7 @@ public class Video {
         if (this.title.length() > 2 && this.title.length() < 101
                 && this.author.length() > 1 && this.author.length() < 101
                 && this.date.length() == 10
-                && this.duration.length() == 5
+                && this.duration.length() == 8
                 && this.description.length() > 24 && this.description.length() < 256
                 && this.format.length() > 1 && this.format.length() < 6
                 && this.path.length() > 4 && this.path.length() < 301) {
