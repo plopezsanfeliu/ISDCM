@@ -128,7 +128,7 @@
                 Títol: <input type="text" name="title"><br>
                 Autor: <input type="text" name="author"><br>
                 Data de llançament(dd/mm/aaaa): <input type="date" name="date"><br>
-                Duració (hh:mm:ss): <input type="time" name="duration"><br>
+                Duració (hh:mm:ss): <input type="text" name="duration" value="hh:mm:ss"><br>
                 Descripció: <input type="text" name="description">
                 Format: <input type="text" name="format">
                 Ruta: <input type="text" name="path">
