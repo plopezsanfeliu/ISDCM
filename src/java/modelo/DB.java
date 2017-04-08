@@ -207,7 +207,7 @@ public class DB {
         } catch (SQLException ex) {
             Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         return answer;
     }
 
