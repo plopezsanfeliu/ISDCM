@@ -89,10 +89,12 @@
 
         <div class="bigbox">
             <h1>Cercador de vídeos</h1>
-            <form name="formulario1" method="post" action="servletRegistroVid"
+            <form name="Test" method="post" action="SearchWSServlet"
                   onsubmit="return validateForm1()">
-                Nom: <input type="text" name="name"><br>
-                <input type="submit" name="submit" value="Cercar">
+                <p>Cerca per nom:
+                    <input type="text" name="name">
+                    <input type="submit" value="Cercar nom" name="spellcheckbutton">
+                </p>
             </form>
 
             <h1>Últims vídeos</h1>

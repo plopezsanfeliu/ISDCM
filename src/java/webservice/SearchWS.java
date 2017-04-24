@@ -31,7 +31,6 @@ public class SearchWS {
     private final String PASSWORD = "password";
     private Connection conexion;
     private Statement sentencia;
-    private DB db;
 
     public SearchWS() {
         try {
@@ -40,6 +39,49 @@ public class SearchWS {
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    /**
+     * 
+     * @param type 1 si es busca per títol, 2 si es busca per autor i 3 si es
+     * busca per any de creació
+     * @param str
+     * @return Seqüència XML amb resposta
+     */
+    private String doSearch(int type, String str) {
+        String answer = "";
+        ResultSet rs;
+        String query;
+
+        try {
+            switch (type) {
+                case 1:
+                    query = "SELECT TITLE, AUTHOR, DATE, DURATION, VIEWS, DESCRIPTION FROM ISDCM.VIDEOS WHERE LOWER(TITLE) LIKE '%" + str.toLowerCase() + "%' FETCH FIRST 5 ROWS ONLY";
+
+                    break;
+                case 2:
+                    query = "SELECT TITLE, AUTHOR, DATE, DURATION, VIEWS, DESCRIPTION FROM ISDCM.VIDEOS WHERE LOWER(AUTHOR) LIKE '%" + str.toLowerCase() + "%' FETCH FIRST 5 ROWS ONLY";
+
+                    break;
+                default:
+                    query = "SELECT TITLE, AUTHOR, DATE, DURATION, VIEWS, DESCRIPTION FROM ISDCM.VIDEOS WHERE LOWER(DATE) LIKE '%" + str.toLowerCase() + "%' FETCH FIRST 5 ROWS ONLY";
+
+            }
+            System.out.println(query);
+            sentencia = this.conexion.createStatement();
+
+            rs = sentencia.executeQuery(query);
+
+            while (rs.next()) {
+                answer += "<video>";
+                answer += "<title>" + rs.getString("title") + "</title><author>" + rs.getString("author") + "</author><date>" +rs.getString("date") + "</date><duration>" +rs.getString("duration") + "</duration><views>" +rs.getString("views") + "</views><description>" + rs.getString("description") + "</description>";
+                answer += "</video>";
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return answer;
     }
 
     /**
@@ -50,24 +92,7 @@ public class SearchWS {
      */
     @WebMethod(operationName = "searchVideoByTitle")
     public String searchVideoByTitle(@WebParam(name = "title") String title) {
-        String answer = "";
-        ResultSet rs;
-
-        try {
-            String query = "SELECT TITLE, AUTHOR, DATE, DURATION, VIEWS, FORMAT, PATH FROM ISDCM.VIDEOS WHERE LOWER(TITLE) LIKE '%" + title.toLowerCase() + "%' FETCH FIRST 5 ROWS ONLY";
-            System.out.println(query);
-            sentencia = this.conexion.createStatement();
-
-            rs = sentencia.executeQuery(query);
-
-            while (rs.next()) {
-                answer += rs.getString("title");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return answer;
+        return doSearch(1, title);
     }
 
     /**
@@ -78,7 +103,7 @@ public class SearchWS {
      */
     @WebMethod(operationName = "searchVideoByAuthor")
     public String searchVideoByAuthor(@WebParam(name = "author") String author) {
-        return db.searchVideoByAuthor(author);
+        return doSearch(2, author);
     }
 
     /**
@@ -89,7 +114,7 @@ public class SearchWS {
      */
     @WebMethod(operationName = "searchVideoByYear")
     public String searchVideoByYear(@WebParam(name = "year") String year) {
-        return db.searchVideoByYear(year);
+        return doSearch(3, year);
     }
 
 }
