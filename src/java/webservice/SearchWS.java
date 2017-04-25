@@ -34,10 +34,11 @@ public class SearchWS {
 
     public SearchWS() {
         try {
-            Class.forName("org.apache.derby.jdbc.ClientDriver");
+            //Class.forName("org.apache.derby.jdbc.ClientDriver");
             this.conexion = DriverManager.getConnection(this.CONEXION, this.USUARIO, this.PASSWORD);
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(SearchWS.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

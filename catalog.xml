@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://localhost:8080/SearchWS2/SearchWS2?wsdl" uri="src/conf/xml-resources/web-service-references/SearchWS2/wsdl/localhost_8080/SearchWS2/SearchWS2.wsdl"/>
+    <system systemId="http://localhost:8080/SearchWS2/SearchWS2?xsd=1" uri="src/conf/xml-resources/web-service-references/SearchWS2/wsdl/localhost_8080/SearchWS2/SearchWS2.xsd_1.xsd"/>
     <system systemId="http://localhost:8080/SearchWS/SearchWS?wsdl" uri="src/conf/xml-resources/web-service-references/SearchWS/wsdl/localhost_8080/SearchWS/SearchWS.wsdl"/>
     <system systemId="http://localhost:8080/SearchWS/SearchWS?xsd=1" uri="src/conf/xml-resources/web-service-references/SearchWS/wsdl/localhost_8080/SearchWS/SearchWS.xsd_1.xsd"/>
 </catalog>

@@ -45,7 +45,7 @@
     </target>
     <target name="wsimport-client-SearchWS" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/SearchWS"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/SearchWS" destdir="${build.generated.dir}/jax-wsCache/SearchWS" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/SearchWS/wsdl/localhost_8080/SearchWS/SearchWS.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/SearchWS/SearchWS?wsdl" xnocompile="true" xendorsed="true">
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/SearchWS" destdir="${build.generated.dir}/jax-wsCache/SearchWS" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/SearchWS/wsdl/localhost_8080/SearchWS/SearchWS.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/SearchWS/SearchWS?wsdl" xnocompile="true" xendorsed="true" package="ws_client">
             <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/SearchWS/wsdl/localhost_8080/SearchWS/SearchWS.wsdl"/>
             <produces dir="${build.generated.dir}/jax-wsCache/SearchWS"/>
         </wsimport>
@@ -56,7 +56,7 @@
         </copy>
     </target>
     <target name="wsimport-client-clean-SearchWS" depends="-init-project">
-        <delete dir="${build.generated.sources.dir}/jax-ws/webservice"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/ws_client"/>
         <delete dir="${build.generated.dir}/jax-wsCache/SearchWS"/>
     </target>
     <target name="wsimport-client-generate" depends="wsimport-client-SearchWS"/>

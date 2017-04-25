@@ -13,21 +13,22 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-            <%-- start web service invocation --%><hr/>
+       <%-- start web service invocation --%><hr/>
     <%
     try {
-	webservice.SearchWS_Service service = new webservice.SearchWS_Service();
-	webservice.SearchWS port = service.getSearchWSPort();
+	ws_client.SearchWS_Service service = new ws_client.SearchWS_Service();
+	ws_client.SearchWS port = service.getSearchWSPort();
 	 // TODO initialize WS operation arguments here
 	java.lang.String title = "a";
 	// TODO process result here
 	java.lang.String result = port.searchVideoByTitle(title);
 	out.println("Result = "+result);
     } catch (Exception ex) {
-	System.out.println("Err: " + ex.getMessage());
+	out.println(ex.getMessage());
     }
     %>
     <%-- end web service invocation --%><hr/>
+
 
     </body>
 </html>

@@ -9,7 +9,7 @@
     <client name="SearchWS">
       <wsdl-url>http://localhost:8080/SearchWS/SearchWS?wsdl</wsdl-url>
       <local-wsdl-file>localhost_8080/SearchWS/SearchWS.wsdl</local-wsdl-file>
-      <package-name>webservice</package-name>
+      <package-name forceReplace="true">ws_client</package-name>
       <catalog-file>catalog.xml</catalog-file>
       <wsimport-options>
         <wsimport-option>
@@ -35,6 +35,10 @@
         <wsimport-option>
           <wsimport-option-name>xendorsed</wsimport-option-name>
           <wsimport-option-value>true</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>package</wsimport-option-name>
+          <wsimport-option-value>ws_client</wsimport-option-value>
         </wsimport-option>
       </wsimport-options>
     </client>
