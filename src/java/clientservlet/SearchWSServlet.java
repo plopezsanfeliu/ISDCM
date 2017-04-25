@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.WebServiceRef;
 import webservice.SearchWS_Service;
 
+
 /**
  *
  * @author Pau
@@ -24,6 +25,7 @@ public class SearchWSServlet extends HttpServlet {
 
     @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/SearchWS/SearchWS.wsdl")
     private SearchWS_Service service;
+
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,8 +42,7 @@ public class SearchWSServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
-            String Name = request.getParameter("name");
-            java.lang.String bodyText = Name;
+            
             
             //searchVideoByAuthor doc = searchVideoByAuthor(bodyText); // afegir this
             //String allcontent = doc.getBody();
@@ -52,11 +53,14 @@ public class SearchWSServlet extends HttpServlet {
             out.println("<title>Servlet SearchWSServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SearchWSServlet at " + request.getContextPath() + "</h1>");
-            out.println(searchVideoByAuthor(bodyText));
+            out.println(request.getParameter("name"));
             out.println("</body>");
             out.println("</html>");
         }
+        java.lang.String bodyText = request.getParameter("name");
+        String result = searchVideoByTitle(bodyText);
+        
+        //System.out.println(result);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -98,11 +102,14 @@ public class SearchWSServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private String searchVideoByAuthor(java.lang.String author) {
+    private String searchVideoByTitle(java.lang.String title) {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
         webservice.SearchWS port = service.getSearchWSPort();
-        return port.searchVideoByAuthor(author);
+        return port.searchVideoByTitle(title);
     }
+
+
+
 
 }

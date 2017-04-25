@@ -93,9 +93,14 @@
                   onsubmit="return validateForm1()">
                 <p>Cerca per nom:
                     <input type="text" name="name">
-                    <input type="submit" value="Cercar nom" name="spellcheckbutton">
+                    <input type="submit" value="Cercar nom" name="searchVideoByTitle">
                 </p>
             </form>
+
+            <FORM METHOD="POST"><BR>
+                <INPUT TYPE=SUBMIT NAME=action title="Invoke searchVideoByTitle operation" value=Cerca> 
+                <INPUT TYPE=TEXT NAME=PARAMsearchVideoByTitle0 title="searchVideoByTitle parameter of type java.lang.String">
+            </FORM>
 
             <h1>Últims vídeos</h1>
             <table style="margin: 0 auto;">
