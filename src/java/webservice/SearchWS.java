@@ -57,26 +57,26 @@ public class SearchWS {
         try {
             switch (type) {
                 case 1:
-                    query = "SELECT TITLE, AUTHOR, DATE, DURATION, VIEWS, DESCRIPTION FROM ISDCM.VIDEOS WHERE LOWER(TITLE) LIKE '%" + str.toLowerCase() + "%' FETCH FIRST 5 ROWS ONLY";
+                    query = "SELECT TITLE, AUTHOR, DATE, DURATION, VIEWS, DESCRIPTION FROM ISDCM.VIDEOS WHERE LOWER(TITLE) LIKE '%" + str.toLowerCase() + "%'";
 
                     break;
                 case 2:
-                    query = "SELECT TITLE, AUTHOR, DATE, DURATION, VIEWS, DESCRIPTION FROM ISDCM.VIDEOS WHERE LOWER(AUTHOR) LIKE '%" + str.toLowerCase() + "%' FETCH FIRST 5 ROWS ONLY";
+                    query = "SELECT TITLE, AUTHOR, DATE, DURATION, VIEWS, DESCRIPTION FROM ISDCM.VIDEOS WHERE LOWER(AUTHOR) LIKE '%" + str.toLowerCase() + "%'";
 
                     break;
                 default:
-                    query = "SELECT TITLE, AUTHOR, DATE, DURATION, VIEWS, DESCRIPTION FROM ISDCM.VIDEOS WHERE LOWER(DATE) LIKE '%" + str.toLowerCase() + "%' FETCH FIRST 5 ROWS ONLY";
+                    query = "SELECT TITLE, AUTHOR, DATE, DURATION, VIEWS, DESCRIPTION FROM ISDCM.VIDEOS WHERE LOWER(DATE) LIKE '%" + str.toLowerCase() + "%'";
 
             }
-            System.out.println(query);
             sentencia = this.conexion.createStatement();
 
             rs = sentencia.executeQuery(query);
 
             while (rs.next()) {
-                answer += "<video>";
+                answer += "<myvideo>";
                 answer += "<title>" + rs.getString("title") + "</title><author>" + rs.getString("author") + "</author><date>" +rs.getString("date") + "</date><duration>" +rs.getString("duration") + "</duration><views>" +rs.getString("views") + "</views><description>" + rs.getString("description") + "</description>";
-                answer += "</video>";
+                answer += "</myvideo>";
+                answer += "<br />";
             }
         } catch (SQLException ex) {
             Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);

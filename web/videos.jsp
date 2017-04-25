@@ -89,18 +89,27 @@
 
         <div class="bigbox">
             <h1>Cercador de vídeos</h1>
-            <form name="Test" method="post" action="SearchWSServlet"
+            <form name="Test" method="get" action="results.jsp"
                   onsubmit="return validateForm1()">
-                <p>Cerca per nom:
-                    <input type="text" name="name">
-                    <input type="submit" value="Cercar nom" name="searchVideoByTitle">
+                <p>
+                    <input type="text" name="title">
+                    <input type="submit" value="Cercar nom">
                 </p>
             </form>
-
-            <FORM METHOD="POST"><BR>
-                <INPUT TYPE=SUBMIT NAME=action title="Invoke searchVideoByTitle operation" value=Cerca> 
-                <INPUT TYPE=TEXT NAME=PARAMsearchVideoByTitle0 title="searchVideoByTitle parameter of type java.lang.String">
-            </FORM>
+            <form name="Test" method="get" action="results.jsp"
+                  onsubmit="return validateForm1()">
+                <p>
+                    <input type="text" name="author">
+                    <input type="submit" value="Cercar autor">
+                </p>
+            </form>
+            <form name="Test" method="get" action="results.jsp"
+                  onsubmit="return validateForm1()">
+                <p>
+                    <input type="text" name="year">
+                    <input type="submit" value="Cercar any">
+                </p>
+            </form>
 
             <h1>Últims vídeos</h1>
             <table style="margin: 0 auto;">
