@@ -74,9 +74,14 @@ public class SearchWS {
 
             while (rs.next()) {
                 answer += "<myvideo>";
-                answer += "<title>" + rs.getString("title") + "</title><author>" + rs.getString("author") + "</author><date>" +rs.getString("date") + "</date><duration>" +rs.getString("duration") + "</duration><views>" +rs.getString("views") + "</views><description>" + rs.getString("description") + "</description>";
+                answer += "<titlo> <b>Títol:</b> " + rs.getString("title") + "</titlo>"
+                        + "<br/><author> <b>Autor:</b> " + rs.getString("author") + "</author>"
+                        + "<br/><date> <b>Data de llançament(dd/mm/aaaa):</b> " +rs.getString("date") + "</date>"
+                        + "<br/><duration> <b>Duració (hh:mm:ss):</b> " + rs.getString("duration") + "</duration>"
+                        + "<br/><views> <b>Visulitzacions:</b> " + rs.getString("views") + "</views>"
+                        + "<br/><description> <b>Descripció:</b> " + rs.getString("description") + "</description>";
                 answer += "</myvideo>";
-                answer += "<br />";
+                answer += "<br/><hr /><br/>";
             }
         } catch (SQLException ex) {
             Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
