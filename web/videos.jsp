@@ -127,7 +127,7 @@
 
                     while (rs.next()) {
                         out.println("<tr>");
-                        out.println("<td><a href=\"" + rs.getString("path") + "\">" + rs.getString("title") + "</a></td>");
+                        out.println("<td><a href=player.jsp?src=" + rs.getString("path") + "&title=" + rs.getString("title").replaceAll(" ", "%20") + ">" + rs.getString("title") + "</a></td>");
                         out.println("<td>" + rs.getString("author") + "</td>");
                         out.println("<td>" + rs.getString("duration") + "</td>");
                         out.println("<td>" + rs.getString("date") + "</td>");
