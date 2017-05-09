@@ -178,7 +178,7 @@ public class DB {
         ResultSet rs = null;
 
         try {
-            String query = "SELECT TITLE, AUTHOR, DATE, DURATION, VIEWS, FORMAT, PATH FROM ISDCM.VIDEOS FETCH FIRST " + number + " ROWS ONLY";
+            String query = "SELECT ID, TITLE, AUTHOR, DATE, DURATION, VIEWS, FORMAT, PATH FROM ISDCM.VIDEOS FETCH FIRST " + number + " ROWS ONLY";
 
             sentencia = this.conexion.createStatement();
 
@@ -207,7 +207,7 @@ public class DB {
         } catch (SQLException ex) {
             Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return answer;
     }
 
@@ -217,5 +217,55 @@ public class DB {
 
     public String searchVideoByYear(String author) {
         return null;
+    }
+
+    public void incrementView(String id) {
+        try {
+            String query = "UPDATE videos SET views = views + 1 WHERE id = " + id;
+            sentencia = this.conexion.createStatement();
+            sentencia.executeUpdate(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public String getURLById(int id) {
+        String url = null;
+        
+        try {
+            String query = "SELECT path FROM videos WHERE id = " + id;
+            
+            sentencia = this.conexion.createStatement();
+            
+            ResultSet rs = sentencia.executeQuery(query);
+            
+            while (rs.next()) {
+                url = rs.getString("path");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return url;
+    }
+    
+    public String getTitleById(int id) {
+        String url = null;
+        
+        try {
+            String query = "SELECT title FROM videos WHERE id = " + id;
+            
+            sentencia = this.conexion.createStatement();
+            
+            ResultSet rs = sentencia.executeQuery(query);
+            
+            while (rs.next()) {
+                url = rs.getString("title");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return url;
     }
 }

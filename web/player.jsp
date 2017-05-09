@@ -4,8 +4,14 @@
     Author     : Pau
 --%>
 
+<%@page import="modelo.DB"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+    DB db = new DB();
+    String url = db.getURLById(Integer.parseInt(request.getParameter("id")));
+    String title = db.getTitleById(Integer.parseInt(request.getParameter("id")));
+%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -20,8 +26,8 @@
       $("#jquery_jplayer_1").jPlayer({
         ready: function () {
           $(this).jPlayer("setMedia", {
-            title: "<% out.println(request.getParameter("title") + "\","); %>
-            m4v: "<% out.println(request.getParameter("src") + "\""); %>
+            title: "<% out.println(title + "\","); %>
+            m4v: "<% out.println(url + "\""); %>
         }).jPlayer("play");
         },
         cssSelectorAncestor: "#jp_container_1",
